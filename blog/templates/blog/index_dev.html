@@ -1,0 +1,31 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{%  block style_css %}
+    <link type = "text/css", href="{% static 'blog/css/style.css' %}"
+          rel="stylesheet"/>
+{% endblock %}
+
+{%  block main_content %}
+    
+ <div class="main_conteiner">
+    <h1 class="title_post_dev">Мое развитие
+    </h1>
+    <div class="slide" id="slide">
+      <img class="my-photo" src="{% static 'blog/images/photo_selfy.png' %}" width="400" alt="my_photo">
+      <div class="text_dev">
+        <br>Для развития в web начал изучать JS. А для удовлетворения грёз
+            поработать в ML, изучаю библиотеки NumPy, Pandas, а также
+            подтягиваю математику. Каждое утро слушаю уроки английского.</br>
+        <br>Все это замечательно, но никакое обучение не заменит боевую
+          практику.
+      Поэтому я отдаю себе отчет, что настоящее развитие впереди и начнется,
+      когда я буду в команде профессиональных разработчиков.
+      </br>
+        <br>В заключении, обращаюсь к работодателям, при выборе кандидатов -
+          обратите внимание на меня.</br>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+

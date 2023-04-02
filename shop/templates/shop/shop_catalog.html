@@ -1,0 +1,77 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% load shop_tags %}
+
+
+{%  block style_css %}
+    <link type = "text/css", href="{% static 'shop/css/main_shop_style.css' %}"
+          rel="stylesheet"/>
+    <script src="{% static 'shop/js/popup.js' %}"></script>
+    <script src="{% static 'shop/js/run_for_image_product.js' %}"></script>
+    <script src="{% static 'shop/js/set_param.js' %}"></script>
+    <script src="{% static 'shop/js/logout_site.js' %}"></script>
+    <script src="{% static 'shop/js/get_status.js' %}"></script>
+{% endblock %}
+
+
+{%  block main_content %}
+<p1 class="span">Демонстрационный сайт интернет магазина</p1>
+<div class="title_shop" style="background: url('{% static 'shop/images/header_shop.png' %}')">
+</div>
+<div class="main_conteiner">
+    {% for thing in list_things %}
+        <div class="category-container-catalog">
+            <img src="{{ thing.photo.url }}" class="img-content-catalog"
+                 alt="{{ thing.title }}">
+            <a href="{{ thing.get_absolute_url }}" class="category_title">
+                {{ thing.title }}
+            </a>
+            <!-- <p3>{{ thing.amount }}</p3> ! указывать количество?? -->
+        </div>
+        {% endfor %}
+
+      <!-- include tag 'show_all_categories' !-->
+    {% show_all_categories %}
+</div>
+
+{% endblock %}
+
+
+{% block sidebar %}
+
+    {% if request.user.is_authenticated %}
+        <h2 class="new-title"> Добрый день {{ user.name }}! </h2>
+        <button id="open-modal-btn" class="enter">Моя корзина</button>
+        <a href="{% url 'logout_test' %}" id="logout_site" class="fogot_password">Выйти</a>
+        <script>
+          var make_order_url = "{% url 'make_order' %}";
+          // использовать переменную make_order_url для создания ссылки
+        </script>
+        <div id="modal" class="show">
+          <div id="modal-content" class="modal-content" style="background:
+          url('{% static 'shop/images/popup_background2.png' %}'")>
+            <span id="close-modal-btn">&times;</span>
+              <div class="cart" id="cart">
+                <div id="cart-items"></div>
+              </div>
+          </div>
+        </div>
+        <div id="modal2" class="show">
+          <div id="modal-content2" class="modal-content" style="background:
+          url('{% static 'shop/images/popup_background2.png' %}'")>
+            <span id="close-modal-btn2">&times;</span>
+              <div class="cart" id="cart2">
+                <div id="cart-items2"></div>
+              </div>
+          </div>
+        </div>
+    {% else %}
+        <h2 class="new-title"> Войти</h2>
+        <a href="{% url 'login_test' %}" class="enter">Войти</a>
+        <a href="{% url 'register' %}" class="fogot_password">Регистрация</a>
+        <a href="{% url 'password_reset' %}" class="fogot_password">Вспомнить
+        пароль</a>
+    {% endif %}
+
+
+{% endblock %}

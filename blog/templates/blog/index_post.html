@@ -1,0 +1,29 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{%  block style_css %}
+    <link type = "text/css", href="{% static 'blog/css/style.css' %}"
+          rel="stylesheet"/>
+{% endblock %}
+
+{%  block main_content %}
+    <h1 class="title-post" id="title-post">{{ post.title }}</h1>
+    <div class="main_conteiner">
+    {% autoescape off %}
+        <p>{{ post.body|linebreaks }}</p>
+    {% endautoescape %}
+    </div>
+{% endblock %}
+
+{% block sidebar %}
+ <h2 class="facts">Факты обо мне</h2>
+   {% for post_sb in post_sidebar %}
+    <div class="sidebar">
+        <img src="{{ post_sb.image.url }}" class="img-sidebar" alt="{{ post_sb.title }}">
+        <div class="sidebar-container">
+        <a href="{{ post_sb.get_absolute_url }}" class="sidebar-link">{{ post_sb.title }}</a>
+        </div>
+    </div>
+   {% endfor %}
+
+{% endblock %}

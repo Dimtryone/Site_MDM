@@ -1,0 +1,40 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{%  block style_css %}
+    <link type = "text/css", href="{% static 'blog/css/style.css' %}"
+          rel="stylesheet"/>
+{% endblock %}
+{%  block main_content %}
+    {% for post in posts %}
+    <div class="content">
+        <img src="{{ post.image.url }}" class="img-content"
+          alt="{{ post.title }}">
+        <div class="content-container">
+            <div class="content-link">
+                <a href="{{ resume }}" class="link-for-me">My work
+                    experience</a>
+                <a href="{{ git }}" class="link-for-me">my github</a>
+            </div>
+            <p class="content-headline">
+            <a href="{{ post.get_absolute_url }}" class="content-headline-link">
+                {{post.title}}</a>
+            </p>
+            <p class="text">{{ post.body|truncatewords:25 }}</p>
+        </div>
+    </div>
+    {% endfor %}
+{% endblock %}
+
+{% block sidebar %}
+ <h2 class="facts">Факты обо мне</h2>
+   {% for post_sb in post_sidebar %}
+    <div class="sidebar">
+        <img src="{{ post_sb.image.url }}" class="img-sidebar" alt="{{ post_sb.title }}">
+        <div class="sidebar-container">
+        <a href="{{ post_sb.get_absolute_url }}" class="sidebar-link">{{ post_sb.title }}</a>
+        </div>
+    </div>
+   {% endfor %}
+
+{% endblock %}

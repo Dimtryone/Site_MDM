@@ -1,0 +1,43 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% load shop_tags %}
+
+{%  block style_css %}
+    <link type = "text/css", href="{% static 'shop/css/main_shop_style.css' %}"
+          rel="stylesheet"/>
+    <script src="{% static 'shop/js/get_token.js' %}"></script>
+ {% endblock %}
+
+
+{%  block main_content %}
+
+<p1 class="span">Демонстрационный сайт интернет магазина</p1>
+<div id='title_shop' class="title_shop" style="background: url('{% static 'shop/images/header_shop.png' %}')">
+</div>
+<div class="form_conteiner">
+    <form method="post">
+      {% csrf_token %}
+     {{ form.non_field_errors }}
+      {% for f in form %}
+        <p><label for="{{ f.id_for_label }}"></label>{{ f }}</p>
+        <div> {{ f.errors }}</div>
+      {% endfor %}
+    <button type="submit" id="enter_btn" class="submite-registration">Войти
+    </button>
+    </form>
+</div>
+
+{% endblock %}
+
+{% block sidebar %}
+
+     <h2 class="new-title"> Войти</h2>
+    {% if request.user.is_authenticated %}
+        <p> Добрый день {{ user.name }}! </p>
+        <a href="{% url 'logout_test' %}"  class="enter">Выйти</a>
+    {% else %}
+        <a href="{% url 'password_reset' %}" class="fogot_password">Вспомнить
+        пароль</a>
+        <a href="{% url 'register' %}" class="fogot_password">Регистрация</a>
+    {% endif %}
+{% endblock %}

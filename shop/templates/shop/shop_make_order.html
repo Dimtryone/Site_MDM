@@ -1,0 +1,83 @@
+{% extends 'blog/base.html' %}
+<!-- для расширения подгрузки базового шаблона !-->
+{% load static %}
+{% load shop_tags %}
+
+
+{%  block style_css %}
+    <link type = "text/css", href="{% static 'shop/css/main_shop_style.css' %}"
+          rel="stylesheet"/>
+    <script src="{% static 'shop/js/make_order.js' %}"></script>
+    <script src="{% static 'shop/js/popup.js' %}"></script>
+    <script src="{% static 'shop/js/logout_site.js' %}"></script>
+    <script src="{% static 'shop/js/get_status.js' %}"></script>
+{% endblock %}
+
+
+{% block main_content %}
+<span class="span">Демонстрационный сайт интернет магазина</span>
+  <div id="main-conteiner" class="main_conteiner">
+    <div id='title_shop' class="title_shop" style="background: url('{% static 'shop/images/header_shop.png' %}')">
+    </div>
+      <div style="background:
+      url('{% static 'shop/images/popup_background2.png' %}')" class="form-order">
+        <form method="post">
+          {% csrf_token %}
+          <input type="text" id="address" class="feild-order" placeholder="Введите адрес">
+          <input type="textarea"  class="feild-order" id="description" name="What" placeholder="Комментарии к заказу">
+          <input type="text"  class="feild-order" id="payment_method" name="What"
+                  placeholder="Метод оплаты">
+          <div style="display: flex; align-items: center;">
+            <p style="text-align: justify">
+                Стандартное согласие на обработку персональных данных. Сайт
+                демонстрационный, поэтому можете указать вымышленный адрес, на
+                ваш email поступят 2 письма, что заказ принят, а потом что заказ
+                доставлен.
+            </p>
+            <input type=checkbox class="checkbox">
+          </div>
+          <p class="disp_none">{% url 'shop' %}</p>
+          <button id="make_order" class="make-order">Заказать</button>
+        </form>
+      </div>
+  </div>
+{%  endblock %}
+
+{%  block sidebar %}
+    <section class="section">
+    {% if request.user.is_authenticated %}
+        <h2 class="new-title"> Добрый день {{ user.name }}! </h2>
+        <button id="open-modal-btn" class="enter">Моя корзина</button>
+        <a href="{% url 'logout_test' %}"  class="fogot_password" id="logout_site">Выйти</a>
+        <script>
+          var make_order_url = "{% url 'make_order' %}";
+          // использовать переменную make_order_url для создания ссылки
+        </script>
+        <div id="modal" class="show">
+          <div id="modal-content" class="modal-content" style="background:
+          url('{% static 'shop/images/popup_background2.png' %}'")>
+            <span id="close-modal-btn">&times;</span>
+              <div class="cart" id="cart">
+                <div id="cart-items"></div>
+              </div>
+          </div>
+        </div>
+        <div id="modal2" class="show">
+          <div id="modal-content2" class="modal-content" style="background:
+          url('{% static 'shop/images/popup_background2.png' %}'")>
+            <span id="close-modal-btn2">&times;</span>
+              <div class="cart" id="cart2">
+                <div id="cart-items2"></div>
+              </div>
+          </div>
+        </div>
+    {% else %}
+        <h2 class="new-title"> Войти</h2>
+        <a href="{% url 'login_test' %}" class="enter">Войти</a>
+        <a href="{% url 'register' %}" class="fogot_password">Регистрация</a>
+        <a href="{% url 'password_reset' %}" class="fogot_password">Вспомнить
+        пароль</a>
+    {% endif %}
+
+
+{% endblock %}

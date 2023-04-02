@@ -1,0 +1,47 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{%  block style_css %}
+    <link type = "text/css", href="{% static 'blog/css/style.css' %}"
+          rel="stylesheet"/>
+{% endblock %}
+
+{%  block main_content %}
+<div class="main_conteiner">
+  <h1 class="title_post_dev">Достижения</h1>
+  <div class="text_ach" >
+    <p3> Конечно, на этой странице мне бы хотелось разместить свою победу на
+       олимпиаде по программированию или рассказать об успехе в каком-нибудь
+        хакатоне.  Добавить сверху захватывающую историю о создании
+        приложения,  которое пользуется спросом на рынке...  Но здесь сразу
+        стоп-стоп. Я отдаю себе отчет, что занимаюсь программированием только
+        с апреля 2022 года.  Амбиции амбициями, а пока что сухо.</p>
+
+    <p3>Закончил курсы (некоторые фото ниже):
+      <ul>
+          <li> Разработчик на языке Python </li>
+          <li>Основы баз данных. SQL запросов</li>
+          <li> Python для профессионалов</li>
+          <li>Python для начинающих</li>
+          <li>Курсы программирования в 1С</li>
+      </ul>
+    </p>
+    <p3>А самое главное я продолжаю учиться дальше, каждый день иду вперед, а
+     дорогу осилит сами знаете кто. Мое мнение, что сегодня самым большим
+        достижением этот сайт. Потому что работая над ним я столкнулся с
+        различными технологиями, узнал очень много нового. </p>
+  </div>
+
+  <div class="sertificat-conteiner">
+    <img class="img-sertificat"
+         src="{{ MEDIA_URL }}/blog/icon/2023/02/03/dvfu.png" width="400"
+         alt="sertificat">
+    <img class="img-sertificat" src="{% static '/images/netology.png' %})" width="400" alt="diplom">
+  </div>
+</div>
+
+{% endblock %}
+
+{% block sidebar %}
+
+{% endblock %}

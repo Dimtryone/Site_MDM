@@ -1,0 +1,63 @@
+{% load static %}
+<!-- подгружает статические файлы !-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+
+    {%  block style_css %}
+
+    {% endblock %}
+
+</head>
+
+<header class="header">
+    <div class="header-content" style="background: url('{% static 'blog/images/background_header.jpg' %}')">
+        <ul class="list-link-header">
+        {% for menu in header_menu %}
+            <li>
+                <a class="link-header" href="{% url menu.url_name %}">{{ menu.title}}</a>
+            </li>
+        {% endfor %}
+        </ul>
+        <h2 class="title-header">Обо мне и моем пути в IT</h2>
+    </div>
+</header>
+
+
+<div class = "page">
+<main class="main">
+
+  {%  block main_content %}
+  {% endblock %}
+
+</main>
+
+<section class="section">
+    {% block sidebar %}
+    {% endblock %}
+
+</section>
+</div>
+
+<footer class="footer">
+  <adress class="adress">
+
+    <a href="mailto:9274547212@mail.ru" class="social-link-mail" style="background: url('{% static 'blog/images/mail.png' %}')">
+      <span class="visually-hidden">написать на электронную почту</span>
+    </div>
+
+    <a href="mailto:9274547212@mail.ru" class="social-link-mail" style="background: url('{% static 'blog/images/mail.png' %}')">
+      <span class="visually-hidden">написать на электронную почту</span>
+    </a>
+    <a href="https://telegram.me/DmitryVdovin1" class="social-link-telegram" style="background: url('{% static 'blog/images/telegram.png' %}')">
+      <span class="visually-hidden">написать в телеграмм</span>
+    </a>
+
+  </adress>
+
+</footer>
